@@ -1,0 +1,37 @@
+import {useState , useEffect } from 'react';
+import Movie from './components/Movie'
+function App(){
+    const [loading, setloading] = useState(true);
+  const [movies, setMoibes] = useState([]);
+  //api받아오기
+  const getMovies = async () => {
+    const json = await(await fetch('https://yts.mx/api/v2/list_movies.json?minimum_rating=8.5&sort_by=year')).json();
+    setMoibes(json.data.movies);
+    setloading(false);
+  };
+  useEffect(() => {
+    getMovies();
+  },[]);
+  
+  return<div>
+    <h1>{loading ? 'LOADING...' : 'MOVIES!!'}</h1>
+    { loading ? null : <ul className='col'>
+      {movies.map((item) => 
+        <Movie id={item.id} medCoverImg={item.medium_cover_image} title={item.title} rating={item.rating} genres ={item.genres} summary={item.summary}/>
+        )}
+    </ul> } 
+  </div>
+}
+
+export default App;
+
+// fetch('https://yts.mx/api/v2/list_movies.json?minimum_rating=8.8&sort_by=year')
+// .then((response)=>response.json())
+// .then((json)=>{
+//   setMoibes(json.data.movies);
+//   setloading(false);
+// });
+
+
+이부분이 간략하게 만든것
+const getMovies = async () => 

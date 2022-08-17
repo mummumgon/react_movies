@@ -1,0 +1,31 @@
+import {useState , useEffect } from 'react';
+function App() {
+  //toDo절대 여기 값을 수정하지 X, setToDo를 활용하여 값을 수정해야함! 무조건
+  const [toDo, setToDo] = useState('');
+  const [toDoArr, setToDoArr] = useState([]);
+  const onChange = (e) => setToDo(e.target.value);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if(toDo === ''){
+      return ;
+    };
+    //함수를 보낼때 함수의 첫번째argument((currentArr)=>)를 현재 state값으로 보냄
+    // [toDo, ...currentArr]) 계산하거나 새로운 state 값으로 만들어 return 해서 사용
+    // [toDo, ...currentArr] 합쳐져서 const [toDo, 에 새로만들어진 arr를 추가
+    setToDoArr((currentArr)=> [toDo, ...currentArr]);
+    //toDo에 값을 바꾸고 싶으면 setToDo에서 해야함.
+    //형태는('')값을 정해서 보낼때 
+    setToDo('');
+  };  
+  return <div>
+    <h1>My To Do List({toDoArr.length})</h1>
+    <form onSubmit={onSubmit}>
+      <input onChange={onChange} value={toDo} type="text" placeholder='Write your to do ...'/>
+      <button onClick={onSubmit.onClick}>저장</button>
+    </form>
+    <hr/>
+    {toDoArr.map((item , idx)=><li key={idx}>{idx} == {item}</li>)}
+  </div>
+}
+
+export default App;

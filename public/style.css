@@ -1,0 +1,5 @@
+ul,ol,li{list-style:none; padding: 0;}
+.title{font-size: 30px; }
+.col{ display: flex; justify-content: center; align-items: center; flex-wrap: wrap;}
+.col.left{justify-content:left;}
+.overhiden{overflow: hidden;width: 100%;}

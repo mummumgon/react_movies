@@ -1,0 +1,17 @@
+import {useState , useEffect } from 'react';
+function App() {
+  const [loding , setLoding] = useState(true);
+  const [coins , setcoins] = useState([]);
+  useEffect(() => {
+    fetch('https://api.coinpaprika.com/v1/tickers').then((response) => response.json()).then((json)=> {setcoins(json); setLoding(false);});
+    console.log('코인들:',coins);
+  }, []);
+  return <div>
+   <h1>{loding ? "Loading..." : `THE COINS!!(${coins.length})` } </h1>
+   <ul>
+      {coins.map((coin)=><li key={coin.id}>RANK({coin.rank}).{coin.name}({coin.symbol}) : ${(coin.quotes.USD.price).toFixed(3)}</li>)}
+   </ul>
+  </div>
+}
+
+export default App;
