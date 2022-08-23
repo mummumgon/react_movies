@@ -9,7 +9,7 @@ import {
 function App() {
   return   <BrowserRouter> {/* Router */}
   <Routes>{/* Switch */}
-    <Route path="/" element={<Home />} />{/* component도 element */}
+    <Route path="/react_movies" element={<Home />} />{/* component도 element */}
     <Route path="/movie/:id" element={<Detail/>} />
     <Route path='/hellow' element={"안녕 나는 누구게?"} />
   </Routes>
