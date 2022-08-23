@@ -1,17 +1,21 @@
 
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom'
+import { useEffect } from 'react';
+import { Link , useParams } from 'react-router-dom';
 function Movie({id, medCoverImg, title, rating , genres, summary}){
+  const x = useParams();
+  useEffect(()=>{},[x]);
     return <li style={{width:`25%`,}}>
         <img src={medCoverImg} alt={`${title}이미지`}/>
           <h2>
-            <Link to={'/movie'}>{title}({rating})</Link>
+            {(x.id === null || x.id === undefined) ? <Link to={`/movie/${id}`}>{title}({rating})</Link> : <span to={`/movie/${id}`}>{title}({rating})</span> }
+            
           </h2>
           <ul className='col left'>
             {/* genres && genres.map genres가 존재하면 만들어라! error남 TypeError: Cannot read properties of undefined (reading 'map')*/}
             {genres && genres.map((g,idx) => <li key={g+idx} style={{ display :'inline-block', margin:"0 10px 0 0"}}><strong>{g}</strong></li>)}
           </ul>
-          <p className='overhiden' style={{ height : 80}}>{summary}</p><hr/>
+          <p>{summary}</p><hr/>
     </li>
 }
 
