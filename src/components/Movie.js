@@ -15,7 +15,7 @@ function Movie({id, medCoverImg, title, rating , genres, summary}){
             {/* genres && genres.map genres가 존재하면 만들어라! error남 TypeError: Cannot read properties of undefined (reading 'map')*/}
             {genres && genres.map((g,idx) => <li key={g+idx} style={{ display :'inline-block', margin:"0 10px 0 0"}}><strong>{g}</strong></li>)}
           </ul>
-          <p>{summary}</p><hr/>
+          <p>{summary.length < 255 ? `${summary}` : `${summary.slice(0,255)}...`}</p><hr/>
     </li>
 }
 
